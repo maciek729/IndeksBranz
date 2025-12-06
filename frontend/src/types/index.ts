@@ -1,5 +1,7 @@
 export interface Industry {
   pkd_code: string;
+  pkd_2007: string;
+  pkd_2025: string;
   name: string;
   index_score: number;
   category: 'A' | 'B' | 'C' | 'D';
@@ -38,6 +40,8 @@ export interface Ranking {
   year: number;
   top: Array<{
     pkd_code: string;
+    pkd_2007: string;
+    pkd_2025: string;
     name: string;
     index_score: number;
     category: string;
@@ -45,6 +49,8 @@ export interface Ranking {
   }>;
   bottom: Array<{
     pkd_code: string;
+    pkd_2007: string;
+    pkd_2025: string;
     name: string;
     index_score: number;
     category: string;

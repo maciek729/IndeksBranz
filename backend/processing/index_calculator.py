@@ -20,8 +20,8 @@ class IndustryIndexCalculator:
 
         result['indicator_size'] = result['GS']
 
-        result = result.sort_values(['pkd_division', 'year'])
-        result['revenue_prev_year'] = result.groupby('pkd_division')['GS'].shift(1)
+        result = result.sort_values(['pkd_group', 'year'])
+        result['revenue_prev_year'] = result.groupby('pkd_group')['GS'].shift(1)
         result['indicator_growth'] = (
             (result['GS'] - result['revenue_prev_year']) / result['revenue_prev_year'] * 100
         )
@@ -104,13 +104,13 @@ class IndustryIndexCalculator:
         Calculate trend direction for each industry
         """
         result = df.copy()
-        result = result.sort_values(['pkd_division', 'year'])
+        result = result.sort_values(['pkd_group', 'year'])
 
-        result['index_rolling'] = result.groupby('pkd_division')['index_score'].transform(
+        result['index_rolling'] = result.groupby('pkd_group')['index_score'].transform(
             lambda x: x.rolling(window=min(periods, len(x)), min_periods=1).mean()
         )
 
-        result['index_trend'] = result.groupby('pkd_division')['index_rolling'].diff()
+        result['index_trend'] = result.groupby('pkd_group')['index_rolling'].diff()
 
         def get_trend_label(val):
             if pd.isna(val):
@@ -156,7 +156,7 @@ class IndustryIndexCalculator:
 
 
 if __name__ == "__main__":
-    from data_loader import DataLoader
+    from processing.data_loader import DataLoader
 
     loader = DataLoader()
     data = loader.get_aggregated_data(start_year=2020, end_year=2024)
@@ -168,7 +168,7 @@ if __name__ == "__main__":
     latest_sorted = latest.sort_values('index_score', ascending=False)
 
     print("\n=== TOP 5 INDUSTRIES ===")
-    print(latest_sorted[['pkd_division', 'NAZWA_PKD', 'index_score', 'category']].head())
+    print(latest_sorted[['pkd_group', 'pkd_2007', 'pkd_2025', 'NAZWA_PKD', 'index_score', 'category']].head())
 
     print("\n=== BOTTOM 5 INDUSTRIES ===")
-    print(latest_sorted[['pkd_division', 'NAZWA_PKD', 'index_score', 'category']].tail())
+    print(latest_sorted[['pkd_group', 'pkd_2007', 'pkd_2025', 'NAZWA_PKD', 'index_score', 'category']].tail())

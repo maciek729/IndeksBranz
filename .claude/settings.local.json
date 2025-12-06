@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(python data_loader.py:*)",
+      "Bash(python -m processing.data_loader:*)",
+      "Bash(python -m processing.index_calculator:*)",
+      "Bash(timeout 10 python:*)"
     ],
     "deny": [],
     "ask": []
