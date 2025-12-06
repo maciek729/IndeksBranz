@@ -1,0 +1,115 @@
+.rankingTable {
+  background: white;
+  border: 1px solid #e5e5e5;
+  overflow: hidden;
+}
+
+.rankingTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rankingTable thead {
+  background: #f8f8f8;
+}
+
+.rankingTable th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 400;
+  color: #666;
+  font-size: 0.75rem;
+  text-transform: none;
+  letter-spacing: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.rankingTable td {
+  padding: 1rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.rankingTable tbody tr {
+  transition: background 0.2s;
+}
+
+.rankingTable tbody tr:hover {
+  background: #f8f8f8;
+}
+
+.rank {
+  font-weight: 400;
+  color: #666;
+  width: 40px;
+  font-size: 0.875rem;
+}
+
+.pkdCode {
+  font-family: 'Courier New', monospace;
+  color: #1a1a1a;
+  width: 80px;
+  font-weight: 400;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+}
+
+.industryName {
+  color: #1a1a1a;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.score {
+  width: 80px;
+}
+
+.scoreBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0;
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.scoreBadge.success {
+  background: #f0f8f4;
+  color: #00A65A;
+  box-shadow: none;
+  border: 1px solid #00A65A;
+}
+
+.scoreBadge.danger {
+  background: #fff5f7;
+  color: #DC0028;
+  box-shadow: none;
+  border: 1px solid #DC0028;
+}
+
+.trend {
+  font-size: 1.125rem;
+  text-align: center;
+  width: 60px;
+  font-weight: 400;
+}
+
+.trendUp {
+  color: #00A65A;
+}
+
+.trendDown {
+  color: #DC0028;
+}
+
+.trendStable {
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .rankingTable th,
+  .rankingTable td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
