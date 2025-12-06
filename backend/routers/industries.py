@@ -1,10 +1,8 @@
 from fastapi import APIRouter, HTTPException
-from typing import List, Optional
-from processing.gus_integration import GusIntegrationService
-from app.config.settings import BDL_API_KEY, REGON_API_KEY
+from typing import Optional
 
 router = APIRouter(prefix="/api", tags=["industries"])
-gus_service = GusIntegrationService(bdl_api_key=BDL_API_KEY, regon_api_key=REGON_API_KEY)
+
 processed_data = None
 
 def set_processed_data(data):
@@ -158,22 +156,3 @@ def get_ranking(year: Optional[int] = None, top: int = 10):
         "top": top_industries,
         "bottom": bottom_industries[::-1]
     }
-
-@router.get("/industry/{pkd_code}/details")
-def get_industry_details(pkd_code: str):
-    """
-    Zwraca szczegółowe dane branży, łącząc BDL i REGON.
-    UWAGA: Wymaga podania przykładowych NIP-ów dla danej branży,
-    ponieważ REGON nie pozwala na wyszukiwanie "daj wszystkie firmy z PKD".
-    """
-    
-    # Przykładowe NIP-y dla demo (w produkcji można je trzymać w bazie danych przypisane do PKD)
-    sample_nips_map = {
-        "62.01": ["5260300252", "5261040828"], # Asseco, Comarch (przykłady)
-        "10.51": ["5730300062"] # Mlekovita (przykład)
-    }
-    
-    sample_nips = sample_nips_map.get(pkd_code, [])
-    
-    data = gus_service.get_industry_report(pkd_code, sample_nips)
-    return data
