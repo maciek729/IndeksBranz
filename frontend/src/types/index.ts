@@ -63,3 +63,21 @@ export interface IndustriesResponse {
   count: number;
   industries: Industry[];
 }
+
+export interface CompanyInfo {
+  name: string;
+  pkd: string;
+  city: string;
+  address?: string;
+  status: string;
+}
+
+export interface IndustryDetails {
+  pkd: string;
+  statistics: {
+    entity_count: number;
+    source: string;
+    year: number;
+  };
+  sample_companies: CompanyInfo[];
+}
