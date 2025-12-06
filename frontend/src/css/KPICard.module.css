@@ -1,0 +1,52 @@
+.kpiCard {
+  background: white;
+  padding: 2rem;
+  border-right: 1px solid #e5e5e5;
+  transition: background 0.2s;
+}
+
+.kpiCard:last-child {
+  border-right: none;
+}
+
+.kpiCard:hover {
+  background: #f8f8f8;
+}
+
+.kpiCard.success {
+  background: white;
+}
+
+.kpiCard.danger {
+  background: white;
+}
+
+.kpiLabel {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.kpiValue {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+  line-height: 1;
+}
+
+.kpiValueSmall {
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.kpiSubtitle {
+  font-size: 0.875rem;
+  color: #888;
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
