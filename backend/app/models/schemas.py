@@ -10,6 +10,8 @@ class IndustryMetrics(BaseModel):
 
 class Industry(BaseModel):
     pkd_code: str
+    pkd_2007: str
+    pkd_2025: str
     name: str
     index_score: float
     category: Literal['A', 'B', 'C', 'D']
@@ -36,6 +38,8 @@ class Stats(BaseModel):
 
 class RankingItem(BaseModel):
     pkd_code: str
+    pkd_2007: str
+    pkd_2025: str
     name: str
     index_score: float
     category: str
@@ -71,6 +75,8 @@ class IndustryMetricsDetailed(BaseModel):
 
 class IndustryDetails(BaseModel):
     pkd_code: str
+    pkd_2007: str
+    pkd_2025: str
     name: str
     current_score: float
     current_category: str

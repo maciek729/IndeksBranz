@@ -3,6 +3,8 @@ import styles from '../css/RankingTable.module.css';
 
 interface Industry {
   pkd_code: string;
+  pkd_2007: string;
+  pkd_2025: string;
   name: string;
   index_score: number;
   category: string;
@@ -34,7 +36,7 @@ function RankingTable({ title, industries, variant }: RankingTableProps) {
             {industries.map((industry, index) => (
               <tr key={industry.pkd_code}>
                 <td className={styles.rank}>{index + 1}</td>
-                <td className={styles.pkdCode}>{industry.pkd_code}</td>
+                <td className={styles.pkdCode}>{industry.pkd_2025}</td>
                 <td className={styles.industryName}>{industry.name}</td>
                 <td className={styles.score}>
                   <span className={`${styles.scoreBadge} ${styles[variant]}`}>

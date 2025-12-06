@@ -19,15 +19,15 @@ def get_statistics():
     category_counts = latest_data['category'].value_counts().to_dict()
 
     return {
-        "total_industries": int(latest_data['pkd_division'].nunique()),
+        "total_industries": int(latest_data['pkd_group'].nunique()),
         "last_update": f"{int(latest_year)}-12-31",
         "top_industry": {
-            "code": top_industry['pkd_division'],
+            "code": top_industry['pkd_2025'],
             "name": top_industry['NAZWA_PKD'],
             "score": float(top_industry['index_score'])
         },
         "worst_industry": {
-            "code": worst_industry['pkd_division'],
+            "code": worst_industry['pkd_2025'],
             "name": worst_industry['NAZWA_PKD'],
             "score": float(worst_industry['index_score'])
         },
@@ -61,7 +61,9 @@ def get_industries(
     industries = []
     for _, row in data.iterrows():
         industries.append({
-            "pkd_code": row['pkd_division'],
+            "pkd_code": row['pkd_group'],
+            "pkd_2007": row['pkd_2007'],
+            "pkd_2025": row['pkd_2025'],
             "name": row['NAZWA_PKD'],
             "index_score": float(row['index_score']),
             "category": row['category'],
@@ -83,7 +85,11 @@ def get_industries(
 
 @router.get("/industries/{pkd_code}")
 def get_industry_details(pkd_code: str):
-    industry_data = processed_data[processed_data['pkd_division'] == pkd_code].copy()
+    industry_data = processed_data[
+        (processed_data['pkd_group'] == pkd_code) |
+        (processed_data['pkd_2007'] == pkd_code) |
+        (processed_data['pkd_2025'] == pkd_code)
+    ].copy()
 
     if len(industry_data) == 0:
         raise HTTPException(status_code=404, detail="Industry not found")
@@ -103,7 +109,9 @@ def get_industry_details(pkd_code: str):
         })
 
     return {
-        "pkd_code": pkd_code,
+        "pkd_code": latest['pkd_group'],
+        "pkd_2007": latest['pkd_2007'],
+        "pkd_2025": latest['pkd_2025'],
         "name": latest['NAZWA_PKD'],
         "current_score": float(latest['index_score']),
         "current_category": latest['category'],
@@ -131,7 +139,9 @@ def get_ranking(year: Optional[int] = None, top: int = 10):
 
     def format_industry(row):
         return {
-            "pkd_code": row['pkd_division'],
+            "pkd_code": row['pkd_group'],
+            "pkd_2007": row['pkd_2007'],
+            "pkd_2025": row['pkd_2025'],
             "name": row['NAZWA_PKD'],
             "index_score": float(row['index_score']),
             "category": row['category'],
